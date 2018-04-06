@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+angle = 0.5
+pos_x = 0.0
+pos_y = 0.0
+line = function(x)
+{
+	pos_x += Math.cos(angle*Math.PI)*x;
+	pos_y += Math.sin(angle*Math.PI)*x;
+	ctx.lineTo(pos_x,pos_y);
+}
+rotate = function(x)
+{
+	angle += x;
+}
+example1 = function()
+{
+	line(50);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+	line(10);
+	rotate(-0.2);
+}
+example2 = function()
+{
+	rotate(-0.1);
+	line(100);
+	rotate(-0.66);
+	line(100);
+	rotate(-0.67);
+	line(100);
+}
+example3 = function()
+{
+	rotate(-0.5);
+	line(20);
+	rotate(0.5);
+	rotate(-0.1);
+	line(100);
+	rotate(-0.80);
+	line(100);
+	rotate(-0.80);
+	line(100)
+	rotate(-0.80);
+	line(100);
+	rotate(-0.80);
+	line(100)
+	rotate(-0.80);
+	line(100);
+	rotate(-0.80);
+	line(100)
+}
+curve = function(x,n)
+{
+	if(n<1)
+	{
+		line(x);
+		rotate(-0.333333);
+		line(x);
+		rotate(0.666666);
+		line(x);
+		rotate(-0.333333);
+		line(x);
+	}
+	else
+	{
+		curve(x/3,n-1);
+		rotate(-0.333333);
+		curve(x/3,n-1);
+		rotate(0.666666);
+		curve(x/3,n-1);
+		rotate(-0.333333);
+		curve(x/3,n-1);
+	}
+}
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.moveTo(pos_x,pos_y);
+//example1();
+//example2();
+//example3();
+curve(300,6);
+ctx.stroke();
+</script>
+
+</body>
+</html>
