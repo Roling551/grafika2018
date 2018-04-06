@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<textarea rows="40" cols="50" id="tf"></textarea>
+<button onclick="myFunction()">Try it</button>
+<script>
+angle = 0.5
+pos_x = 0.0
+pos_y = 0.0
+line = function(x)
+{
+	pos_x += Math.cos(angle*Math.PI)*x;
+	pos_y += Math.sin(angle*Math.PI)*x;
+	ctx.lineTo(pos_x,pos_y);
+}
+rotate = function(x)
+{
+	angle += x;
+}
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.moveTo(pos_x,pos_y);
+//example1();
+//example2();
+//example3();
+curve(300,6);
+ctx.stroke();
+function myFunction() {
+
+	ctx.clearRect(0, 0, 1000, 1000);
+	ctx.beginPath();
+	pos_x=0;
+	pos_y=0;
+	angle = 0.5;
+	ctx.moveTo(pos_x,pos_y);
+	var lines = document.getElementById('tf').value.split('\n');
+	for(i=0; i<lines.length;i++)
+	{
+		var words = lines[i].split(' ');
+		if(words[0]=="forward")
+		{
+			line(Number(words[1]));
+		}
+		if(words[0]=="rotate")
+		{
+			rotate(Number(words[1]));
+		}
+	}
+	ctx.stroke();
+}
+</script>
+
+</body>
+</html>
